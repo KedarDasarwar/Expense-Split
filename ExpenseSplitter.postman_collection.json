@@ -30,7 +30,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"description\": \"Dinner at Restaurant\",\n  \"amount\": 1000,\n  \"paidBy\": \"John\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"John\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Alice\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Bob\",\n      \"share\": 0\n    }\n  ]\n}",
+              "raw": "{\n  \"description\": \"Dinner\",\n  \"amount\": 600,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -93,6 +93,127 @@
               ]
             }
           }
+        },
+        {
+          "name": "Get Single Expense",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{expenseId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Expense - Movie Tickets",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Movie Tickets\",\n  \"amount\": 500,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Add Expense - Pizza",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Pizza\",\n  \"amount\": 280,\n  \"paidBy\": \"Sanket\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Add Expense - Empty Description",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"\",\n  \"amount\": 100,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Add Expense - Missing Paid By",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Missing Paid By\",\n  \"amount\": 100,\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
         }
       ]
     },
@@ -131,6 +252,33 @@
               "path": ["api", "expenses", "people"]
             }
           }
+        },
+        {
+          "name": "Get Settlements",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/settlements",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "settlements"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "People",
+      "item": [
+        {
+          "name": "Get All People",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/people",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "people"]
+            }
+          }
         }
       ]
     }
@@ -138,7 +286,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:5000"
+      "value": "https://expense-split-1csf.onrender.com"
     },
     {
       "key": "expenseId",
