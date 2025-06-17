@@ -1,0 +1,148 @@
+{
+  "info": {
+    "name": "Expense Splitter API",
+    "description": "API collection for testing the Expense Splitter application endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Expenses",
+      "item": [
+        {
+          "name": "Get All Expenses",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            }
+          }
+        },
+        {
+          "name": "Create Expense",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Dinner at Restaurant\",\n  \"amount\": 1000,\n  \"paidBy\": \"John\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"John\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Alice\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Bob\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Expense",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{expenseId}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated Dinner at Restaurant\",\n  \"amount\": 1200,\n  \"paidBy\": \"John\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"John\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Alice\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Bob\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Expense",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{expenseId}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settlements",
+      "item": [
+        {
+          "name": "Get All Settlements",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/settlements",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", "settlements"]
+            }
+          }
+        },
+        {
+          "name": "Get Current Balances",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/balances",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", "balances"]
+            }
+          }
+        },
+        {
+          "name": "Get All People",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/expenses/people",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "expenses", "people"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "expenseId",
+      "value": "your-expense-id-here"
+    }
+  ]
+} 
