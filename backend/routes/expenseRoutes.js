@@ -25,10 +25,14 @@ const validateExpense = [
 
 // Routes
 router.get('/expenses', getExpenses);
+router.post('/expenses', validateExpense, createExpense);
+// Settlement and people routes must come before /expenses/:id
+router.get('/expenses/settlements', getSettlements);
+router.get('/expenses/balances', getBalances);
+router.get('/expenses/people', getPeople);
 router.get('/expenses/:id', [
   param('id').isMongoId().withMessage('Invalid expense ID')
 ], getExpense);
-router.post('/expenses', validateExpense, createExpense);
 router.put('/expenses/:id', [
   param('id').isMongoId().withMessage('Invalid expense ID'),
   ...validateExpense
@@ -36,10 +40,5 @@ router.put('/expenses/:id', [
 router.delete('/expenses/:id', [
   param('id').isMongoId().withMessage('Invalid expense ID')
 ], deleteExpense);
-
-// Settlement routes
-router.get('/settlements', getSettlements);
-router.get('/balances', getBalances);
-router.get('/people', getPeople);
 
 module.exports = router; 

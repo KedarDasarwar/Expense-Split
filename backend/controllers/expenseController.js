@@ -96,10 +96,19 @@ exports.createExpense = async (req, res) => {
     }
 
     // Clean and validate participants
-    const participants = req.body.participants.map(p => ({
+    let participants = req.body.participants.map(p => ({
       name: p.name,
       share: parseFloat(p.share)
     }));
+
+    // If shareType is 'equal', calculate equal share for each participant
+    if (req.body.shareType === 'equal') {
+      const equalShare = parseFloat(req.body.amount) / participants.length;
+      participants = participants.map(p => ({
+        ...p,
+        share: equalShare
+      }));
+    }
 
     // Validate each participant
     const invalidParticipants = participants.filter(p => !p.name || isNaN(p.share));
@@ -173,9 +182,17 @@ exports.createExpense = async (req, res) => {
 // Update expense
 exports.updateExpense = async (req, res) => {
   try {
+    let updateData = { ...req.body };
+    if (updateData.shareType === 'equal' && Array.isArray(updateData.participants)) {
+      const equalShare = parseFloat(updateData.amount) / updateData.participants.length;
+      updateData.participants = updateData.participants.map(p => ({
+        ...p,
+        share: equalShare
+      }));
+    }
     const expense = await Expense.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true, runValidators: true }
     );
     

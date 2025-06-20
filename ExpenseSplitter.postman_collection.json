@@ -1,296 +1,483 @@
 {
   "info": {
-    "name": "Expense Splitter API",
-    "description": "API collection for testing the Expense Splitter application endpoints",
+    "name": "Expense Splitter APIs (Judging Collection)",
+    "description": "API collection for testing the Expense Splitter application endpoints, including all required normal and edge cases for judging.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Expenses",
+      "name": "Expense Management",
       "item": [
         {
-          "name": "Get All Expenses",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
-            }
-          }
-        },
-        {
-          "name": "Create Expense",
+          "name": "Add Expense - Dinner (₹600, paid by Shantanu)",
           "request": {
             "method": "POST",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
-            },
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"description\": \"Dinner\",\n  \"amount\": 600,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "options": { "raw": { "language": "json" } }
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense created successfully\", function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.environment.set('dinnerExpenseId', json.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
               }
-            ]
-          }
-        },
-        {
-          "name": "Update Expense",
-          "request": {
-            "method": "PUT",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{expenseId}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"Updated Dinner at Restaurant\",\n  \"amount\": 1200,\n  \"paidBy\": \"John\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"John\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Alice\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Bob\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        {
-          "name": "Delete Expense",
-          "request": {
-            "method": "DELETE",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{expenseId}}"
-                }
-              ]
             }
-          }
+          ]
         },
         {
-          "name": "Get Single Expense",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "{{expenseId}}"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Add Expense - Movie Tickets",
+          "name": "Add Expense - Groceries (₹450, paid by Sanket)",
           "request": {
             "method": "POST",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Groceries\",\n  \"amount\": 450,\n  \"paidBy\": \"Sanket\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
             },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense created successfully\", function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.environment.set('groceriesExpenseId', json.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Expense - Petrol (₹300, paid by Om)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Petrol\",\n  \"amount\": 300,\n  \"paidBy\": \"Om\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense created successfully\", function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.environment.set('petrolExpenseId', json.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Expense - Movie Tickets (₹500, paid by Shantanu)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"description\": \"Movie Tickets\",\n  \"amount\": 500,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "options": { "raw": { "language": "json" } }
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense created successfully\", function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.environment.set('movieExpenseId', json.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
               }
-            ]
-          }
+            }
+          ]
         },
         {
-          "name": "Add Expense - Pizza",
+          "name": "Add Expense - Pizza (₹280, paid by Sanket)",
           "request": {
             "method": "POST",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
-            },
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"description\": \"Pizza\",\n  \"amount\": 280,\n  \"paidBy\": \"Sanket\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "options": { "raw": { "language": "json" } }
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense created successfully\", function () {",
+                  "  pm.response.to.have.status(201);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.environment.set('pizzaExpenseId', json.data._id);",
+                  "});"
+                ],
+                "type": "text/javascript"
               }
-            ]
-          }
+            }
+          ]
         },
         {
-          "name": "Add Expense - Empty Description",
+          "name": "List All Expenses",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return all expenses\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(Array.isArray(json.data)).to.eql(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Expense - Change Petrol to ₹350",
+          "request": {
+            "method": "PUT",
+            "url": { "raw": "{{baseUrl}}/api/expenses/{{petrolExpenseId}}", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "{{petrolExpenseId}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Petrol\",\n  \"amount\": 350,\n  \"paidBy\": \"Om\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense updated successfully\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(json.data.amount).to.eql(350);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Expense - Remove Pizza",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/expenses/{{pizzaExpenseId}}", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "{{pizzaExpenseId}}"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Expense deleted successfully\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(json.message).to.include('deleted');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Settlements & People",
+      "item": [
+        {
+          "name": "Get All People (should show: Shantanu, Sanket, Om)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/expenses/people", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "people"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return all people\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(json.data).to.include.members(['Shantanu', 'Sanket', 'Om']);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Current Balances (after all transactions)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/expenses/balances", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "balances"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return balances\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(typeof json.data).to.eql('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Settlement Summary (optimized transactions)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/expenses/settlements", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "settlements"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return settlements\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(Array.isArray(json.data)).to.eql(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Edge Cases & Validation",
+      "item": [
+        {
+          "name": "Add Expense - Invalid (negative amount)",
           "request": {
             "method": "POST",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Invalid Amount\",\n  \"amount\": -100,\n  \"paidBy\": \"Shantanu\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
             },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return validation error for negative amount\", function () {",
+                  "  pm.response.to.have.status(400);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(false);",
+                  "  pm.expect(json.error).to.eql('Validation Error');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add Expense - Invalid (empty description)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"description\": \"\",\n  \"amount\": 100,\n  \"paidBy\": \"Shantanu\",\n  \"date\": \"2024-03-20\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "options": { "raw": { "language": "json" } }
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return validation error for empty description\", function () {",
+                  "  pm.response.to.have.status(400);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(false);",
+                  "  pm.expect(json.error).to.eql('Validation Error');",
+                  "});"
+                ],
+                "type": "text/javascript"
               }
-            ]
-          }
+            }
+          ]
         },
         {
-          "name": "Add Expense - Missing Paid By",
+          "name": "Add Expense - Invalid (missing paid_by)",
           "request": {
             "method": "POST",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses"]
-            },
+            "url": { "raw": "{{baseUrl}}/api/expenses", "host": ["{{baseUrl}}"], "path": ["api", "expenses"] },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"description\": \"Missing Paid By\",\n  \"amount\": 100,\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{\n  \"description\": \"Missing Paid By\",\n  \"amount\": 100,\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return validation error for missing paidBy\", function () {",
+                  "  pm.response.to.have.status(400);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(false);",
+                  "  pm.expect(json.error).to.eql('Validation Error');",
+                  "});"
+                ],
+                "type": "text/javascript"
               }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "Settlements",
-      "item": [
-        {
-          "name": "Get All Settlements",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/settlements",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", "settlements"]
             }
-          }
+          ]
         },
         {
-          "name": "Get Current Balances",
+          "name": "Update Non-existent Expense",
           "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/balances",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", "balances"]
+            "method": "PUT",
+            "url": { "raw": "{{baseUrl}}/api/expenses/507f1f77bcf86cd799439011", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "507f1f77bcf86cd799439011"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Non-existent\",\n  \"amount\": 100,\n  \"paidBy\": \"Shantanu\",\n  \"shareType\": \"equal\",\n  \"participants\": [\n    {\n      \"name\": \"Shantanu\",\n      \"share\": 0\n    },\n    {\n      \"name\": \"Sanket\",\n      \"share\": 0\n    },\n      {\n      \"name\": \"Om\",\n      \"share\": 0\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "header": [ { "key": "Content-Type", "value": "application/json" } ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return not found for update\", function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(false);",
+                  "  pm.expect(json.message).to.include('not found');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Get All People",
+          "name": "Delete Non-existent Expense",
           "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/expenses/people",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "expenses", "people"]
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/api/expenses/507f1f77bcf86cd799439011", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "507f1f77bcf86cd799439011"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return not found for delete\", function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(false);",
+                  "  pm.expect(json.message).to.include('not found');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Get Settlements",
+          "name": "Get Balances - With No Expenses",
           "request": {
             "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/settlements",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "settlements"]
+            "url": { "raw": "{{baseUrl}}/api/expenses/balances", "host": ["{{baseUrl}}"], "path": ["api", "expenses", "balances"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return empty balances if no expenses\", function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  var json = pm.response.json();",
+                  "  pm.expect(json.success).to.eql(true);",
+                  "  pm.expect(Object.keys(json.data).length === 0).to.eql(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "name": "People",
-      "item": [
-        {
-          "name": "Get All People",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "{{baseUrl}}/api/people",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "people"]
-            }
-          }
+          ]
         }
       ]
     }
   ],
   "variable": [
-    {
-      "key": "baseUrl",
-      "value": "https://expense-split-1csf.onrender.com"
-    },
-    {
-      "key": "expenseId",
-      "value": "your-expense-id-here"
-    }
+    { "key": "baseUrl", "value": "https://expense-split-1csf.onrender.com" },
+    { "key": "dinnerExpenseId", "value": "" },
+    { "key": "groceriesExpenseId", "value": "" },
+    { "key": "petrolExpenseId", "value": "" },
+    { "key": "movieExpenseId", "value": "" },
+    { "key": "pizzaExpenseId", "value": "" }
   ]
 } 
